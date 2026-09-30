@@ -1,0 +1,268 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Syne", "Inter", ui-sans-serif, sans-serif;
+  --color-ink: #070708;
+  --color-ink-raised: #101014;
+  --color-paper: #f3f3f5;
+  --color-muted: #9a9aa4;
+  --color-line: rgba(243, 243, 245, 0.12);
+  --color-violet: #8d7cba;
+  --color-violet-deep: #241f30;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: #3a3150;
+  color: var(--color-paper);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.delay-1 {
+  animation-delay: 0.08s;
+}
+
+.delay-2 {
+  animation-delay: 0.16s;
+}
+
+.delay-3 {
+  animation-delay: 0.24s;
+}
+
+.section-in {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.section-in.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.particle {
+  animation: pulse 7s ease-in-out infinite;
+}
+
+.hero-pad {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-paper);
+  cursor: pointer;
+}
+
+.hero-pad.is-broken {
+  cursor: default;
+}
+
+.hero-pad:focus-visible {
+  outline: 1px solid var(--color-violet);
+  outline-offset: 10px;
+}
+
+.hero-pad-stage {
+  position: relative;
+  display: block;
+}
+
+.hero-pad:not(.is-broken) .hero-pad-stage {
+  animation: pad-float 7.5s ease-in-out infinite;
+}
+
+.hero-pad.is-broken .hero-pad-stage {
+  animation: pad-impact 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-pad:hover:not(.is-broken) .hero-pad-art {
+  filter: drop-shadow(0 0 16px rgba(141, 124, 186, 0.38));
+}
+
+.hero-pad-art {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.hero-pad-piece {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.08s,
+    opacity 0.5s ease 0.32s;
+}
+
+.hero-pad-mark {
+  position: absolute;
+  top: 44%;
+  left: 50%;
+  width: 40%;
+  height: auto;
+  opacity: 0;
+  filter: drop-shadow(0 0 0 rgba(141, 124, 186, 0));
+  transform: translate(-50%, -50%) scale(0.62);
+  transition:
+    opacity 0.55s ease 0.28s,
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.22s,
+    filter 0.6s ease 0.28s;
+}
+
+.hero-pad.is-broken .piece-shoulder-l {
+  transform: translate(-62%, -90%) rotate(-24deg);
+  opacity: 0;
+}
+
+.hero-pad.is-broken .piece-shoulder-r {
+  transform: translate(62%, -90%) rotate(24deg);
+  opacity: 0;
+}
+
+.hero-pad.is-broken .piece-body-l {
+  transform: translate(-48%, 16%) rotate(-14deg);
+  opacity: 0;
+}
+
+.hero-pad.is-broken .piece-body-r {
+  transform: translate(48%, 16%) rotate(14deg);
+  opacity: 0;
+}
+
+.hero-pad.is-broken .piece-dpad {
+  transform: translate(-80%, -24%) rotate(-18deg);
+  opacity: 0;
+}
+
+.hero-pad.is-broken .piece-stick-l {
+  transform: translate(-36%, 90%) rotate(-16deg);
+  opacity: 0;
+}
+
+.hero-pad.is-broken .piece-stick-r {
+  transform: translate(42%, 96%) rotate(18deg);
+  opacity: 0;
+}
+
+.hero-pad.is-broken .piece-btn-n {
+  transform: translate(18%, -130%) rotate(16deg);
+  opacity: 0;
+}
+
+.hero-pad.is-broken .piece-btn-e {
+  transform: translate(130%, -8%) rotate(22deg);
+  opacity: 0;
+}
+
+.hero-pad.is-broken .piece-btn-s {
+  transform: translate(24%, 130%) rotate(-14deg);
+  opacity: 0;
+}
+
+.hero-pad.is-broken .piece-btn-w {
+  transform: translate(-70%, -16%) rotate(-20deg);
+  opacity: 0;
+}
+
+.hero-pad.is-broken .piece-core {
+  transform: translateY(-80%) scale(0.4);
+  opacity: 0;
+}
+
+.hero-pad.is-broken .hero-pad-mark {
+  opacity: 1;
+  filter: drop-shadow(0 0 18px rgba(141, 124, 186, 0.45));
+  transform: translate(-50%, -50%) scale(1);
+}
+
+@keyframes rise {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pad-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, 10px, 0);
+  }
+}
+
+@keyframes pad-impact {
+  0% {
+    transform: scale(1);
+  }
+  28% {
+    transform: scale(0.94);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .section-in {
+    opacity: 1;
+    transform: none;
+    animation: none;
+    transition: none;
+  }
+
+  .particle,
+  .hero-pad-stage,
+  .hero-pad-piece,
+  .hero-pad-mark {
+    animation: none;
+    transition: none;
+  }
+
+  .hero-pad.is-broken .hero-pad-piece {
+    opacity: 0;
+    transform: none;
+  }
+
+  .hero-pad.is-broken .hero-pad-mark {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
