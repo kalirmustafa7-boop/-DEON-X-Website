@@ -11,3 +11,8 @@ export const navLinks = [
   { id: 'about', label: 'About' },
   { id: 'contact', label: 'Contact' },
 ]
+
+export function sectionHref(id) {
+  const onHome = window.location.pathname === '/'
+  return onHome ? `#${id}` : `/#${id}`
+}

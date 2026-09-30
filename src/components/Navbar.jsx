@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import BrandMark from './BrandMark'
-import { navLinks, site } from '../data/site'
+import { navLinks, sectionHref, site } from '../data/site'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -39,7 +39,7 @@ export default function Navbar() {
       }`}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 md:h-[4.5rem] md:px-8">
-        <a href="#home" className="inline-flex items-center gap-2.5 text-paper">
+        <a href={sectionHref('home')} className="inline-flex items-center gap-2.5 text-paper">
           <BrandMark className="h-7 w-7" />
           <span className="font-display text-[1.05rem] font-semibold tracking-[0.18em]">{site.name}</span>
         </a>
@@ -48,7 +48,7 @@ export default function Navbar() {
           {navLinks.map((link) => (
             <a
               key={link.id}
-              href={`#${link.id}`}
+              href={sectionHref(link.id)}
               className={`text-[0.78rem] tracking-[0.16em] uppercase transition-colors ${
                 active === link.id ? 'text-paper' : 'text-muted hover:text-paper'
               }`}
@@ -95,7 +95,7 @@ export default function Navbar() {
           {navLinks.map((link) => (
             <a
               key={link.id}
-              href={`#${link.id}`}
+              href={sectionHref(link.id)}
               className="border-b border-line py-4 text-sm tracking-[0.16em] uppercase"
               onClick={() => setOpen(false)}
             >

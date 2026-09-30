@@ -1,5 +1,5 @@
 import BrandMark from './BrandMark'
-import { navLinks, site } from '../data/site'
+import { navLinks, sectionHref, site } from '../data/site'
 
 export default function Footer() {
   return (
@@ -17,7 +17,7 @@ export default function Footer() {
             {navLinks.map((link) => (
               <a
                 key={link.id}
-                href={`#${link.id}`}
+                href={sectionHref(link.id)}
                 className="text-[0.75rem] tracking-[0.14em] text-muted uppercase transition-colors hover:text-paper"
               >
                 {link.label}
